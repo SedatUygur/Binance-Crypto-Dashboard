@@ -60,20 +60,22 @@ const resolvers = {
        * @returns {Promise<TradingPair[]>} A promise that resolves to an array of trading pair symbols.
        * If an error occurs during fetching, returns an empty array.
        */
-      tradingPairs: async () => {
+      tradingPairs: async (_, { filter }) => {
         // Fetch trading pair info from Binance API
         try {
           const response = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
           // Filter for trading pairs and slice the first 100
-          const pairs = response.data.symbols
-            .filter((s) => s.status === 'TRADING')
-            .slice(0, 100)
-            .map((s) => ({
-              symbol: s.symbol,
-              baseAsset: s.baseAsset,
-              quoteAsset: s.quoteAsset,
-            }));
-          return pairs;
+          let pairs = response.data.symbols.filter(s => s.status === 'TRADING').slice(0, 100);
+          if (filter) {
+            pairs = pairs.filter(pair =>
+              pair.symbol.toLowerCase().includes(filter.toLowerCase())
+            );
+          }
+          return pairs.map(s => ({
+            symbol: s.symbol,
+            baseAsset: s.baseAsset,
+            quoteAsset: s.quoteAsset,
+          }));
         } catch (err) {
           console.error(err);
           return [];
