@@ -11,7 +11,11 @@ const httpLink = new HttpLink({
 // WebSocket link for subscriptions using graphql-ws
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: 'ws://localhost:4000/subscriptions',
+    url: `ws://${process.env.NEXT_PUBLIC_MY_IP}:4000/subscriptions`,
+    // Optional: pass authentication token
+    /*connectionParams: {
+      authentication: user.authToken,
+    },*/
     retryAttempts: 5,
   })
 );

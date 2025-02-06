@@ -8,12 +8,11 @@ import PairDetail from '../components/PairDetail';
 export default function Home() {
   const [selectedPair, setSelectedPair] = useState<TradingPair | null>(null);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div>
       <main style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
         <h1>Crypto Dashboard</h1>
         {/* Display the list of 100 trading pairs with search/filter */}
         <TradingPairsList onSelectPair={(pair) => setSelectedPair(pair)} />
-
         {/* When a trading pair is selected, show its ticker subscription and details */}
         {selectedPair && (
           <section style={{ marginTop: '2rem' }}>
