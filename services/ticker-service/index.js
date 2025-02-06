@@ -11,6 +11,10 @@ async function addUserSubscription(userId, symbol) {
   await redis.sadd(`user:${userId}:subscriptions`, symbol);
 }
 
+async function getUserSubscriptions(userId) {
+  return await redis.smembers(`user:${userId}:subscriptions`);
+}
+
 // Number of trading pairs to fetch
 const PAIR_COUNT = 100;
 const REDIS_CHANNEL = 'tickerUpdates';

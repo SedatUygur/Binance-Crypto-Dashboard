@@ -18,6 +18,10 @@ async function addUserSubscription(userId, symbol) {
   await redisSubscriber.sadd(`user:${userId}:subscriptions`, symbol);
 }
 
+async function getUserSubscriptions(userId) {
+  return await redis.smembers(`user:${userId}:subscriptions`);
+}
+
 // Schema Definition
 const typeDefs = `#graphql
   type TradingPair {
