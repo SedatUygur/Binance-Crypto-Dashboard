@@ -4,7 +4,7 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
 import client from '../lib/apolloClient';
-//import GlobalStyles from '../styles/GlobalStyles';
+import GlobalStyles from '../styles/GlobalStyles';
 
 const theme = {
   colors: {
@@ -30,7 +30,7 @@ export default function RootLayout({
       <body>
         <ApolloProvider client={client}>
           <ThemeProvider theme={theme}>
-            {/* <GlobalStyles /> */}
+            <GlobalStyles />
             {children}
           </ThemeProvider>
         </ApolloProvider>
