@@ -155,6 +155,18 @@ redisSubscriber.subscribe(REDIS_CHANNEL, (err, count) => {
     }
 });
 
+redisSubscriber.on('message', (channel, message) => {
+    if (channel === REDIS_CHANNEL) {
+      try {
+        const tickerData = JSON.parse(message);
+        // Publish to Apollo PubSub
+        pubsub.publish(TICKER_TOPIC, tickerData);
+      } catch (err) {
+        console.error('Error parsing ticker data from Redis:', err);
+      }
+    }
+});
+
 // Create the Apollo Server
 const server = new ApolloServer({
     typeDefs,
