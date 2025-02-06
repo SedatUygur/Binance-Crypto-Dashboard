@@ -48,13 +48,25 @@ This project is a real-time cryptocurrency dashboard built with Node.js, Next.js
    git clone https://github.com/SedatUygur/Binance-Crypto-Dashboard.git
    cd crypto-dashboard
 
-### With Docker
+2. **Install dependencies for both client and services:**
+   ```bash
+   npm install
+   ```
 
-Ensure Docker and Docker Compose are installed. From the project root, run:
-```bash
-docker-compose up --build
-```
-This will start the application on `http://localhost:3000`.
+3. **Docker Compose (Optional):**
+   If you prefer to use Docker, you can build and run the application using Docker Compose. Make sure Docker and Docker Compose are installed on your machine. Then run:
+   ```bash
+   docker-compose up --build
+   ```
+   This command will build the Docker images and start the containers.
+
+4. **Run the application:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Access the application:**
+   Open your browser and navigate to `http://localhost:3000`.
 
 ### Usage
 
