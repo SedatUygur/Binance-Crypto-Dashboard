@@ -1,20 +1,19 @@
 'use client';
 
-import { Geist, Geist_Mono } from "next/font/google";
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
+import { ThemeProvider } from 'styled-components';
 import client from '../lib/apolloClient';
-import "./globals.css";
+//import GlobalStyles from '../styles/GlobalStyles';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const theme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#1c1c1e',
+    background: '#f5f5f7',
+    text: '#333',
+  },
+};
 
 /*export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,11 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         <ApolloProvider client={client}>
-          {children}
+          <ThemeProvider theme={theme}>
+            {/* <GlobalStyles /> */}
+            {children}
+          </ThemeProvider>
         </ApolloProvider>
       </body>
     </html>
