@@ -143,4 +143,13 @@ const resolvers = {
           },
         },
     },
-  };
+};
+
+// Create the Apollo Server
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    subscriptions: {
+      path: '/subscriptions',
+    },
+});
