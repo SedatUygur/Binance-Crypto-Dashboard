@@ -129,8 +129,10 @@ const resolvers = {
          * @returns {AsyncIterator<Ticker>} An async iterator over the ticker updates
          * for the requested symbol.
          */
-          subscribe: (_, { symbol }) => {
-            // I simply filter messages published to our internal pubsub channel
+          subscribe: async (_, __, context) => {
+            // Assume context carries user ID from authentication middleware
+            const subscriptions = await getUserSubscriptions(context.userId);
+            // Use a filtering mechanism on PubSub to only forward messages matching subscriptions
             return pubsub.asyncIterator(TICKER_TOPIC);
           },
         /**
@@ -145,9 +147,10 @@ const resolvers = {
          * @returns {Ticker | null} The filtered message, or null if it does not match
          * the requested symbol.
          */
-          resolve: (payload, args) => {
+          resolve: (payload, args, context) => {
             // Filter for the requested symbol.
-            if (payload.symbol.toLowerCase() === args.symbol.toLowerCase()) {
+            // Only send update if symbol is in user's subscriptions
+            if (context.userSubscriptions.includes(payload.symbol) && payload.symbol.toLowerCase() === args.symbol.toLowerCase()) {
               return payload;
             }
             return null; // or skip if I want to filter out non-matching updates
