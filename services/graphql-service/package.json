@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/SedatUygur/Binance-Crypto-Dashboard/issues"
   },
-  "homepage": "https://github.com/SedatUygur/Binance-Crypto-Dashboard"
+  "homepage": "https://github.com/SedatUygur/Binance-Crypto-Dashboard",
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "axios": "^1.7.9",
+    "graphql": "^16.10.0",
+    "graphql-subscriptions": "^3.0.0",
+    "ioredis": "^5.4.2"
+  }
 }
