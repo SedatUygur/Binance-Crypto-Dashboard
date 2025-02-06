@@ -24,3 +24,17 @@ export const GET_PAIR_DETAIL = gql`
     }
   }
 `;
+
+// Subscription for ticker updates on a specific pair
+export const TICKER_UPDATE = gql`
+  subscription OnTickerUpdate($symbol: String!) {
+    tickerUpdate(symbol: $symbol) {
+      symbol
+      price
+      high24hr
+      low24hr
+      priceChange24hr
+      priceChangePercent24hr
+    }
+  }
+`;
