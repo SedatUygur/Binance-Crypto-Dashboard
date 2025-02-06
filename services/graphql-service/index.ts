@@ -64,5 +64,41 @@ const resolvers = {
           return [];
         }
       },
+      /**
+       * Fetches detailed information for a specific cryptocurrency trading pair.
+       * Utilizes Binance's API to retrieve exchange information.
+       *
+       * @param {String} symbol The cryptocurrency symbol for which to receive detailed information.
+       *
+       * @returns {Promise<Ticker>} A promise that resolves to an object with the following properties:
+       * - symbol: The cryptocurrency symbol.
+       * - price: The latest ticker price.
+       * - high24hr: The highest price in the past 24 hours.
+       * - low24hr: The lowest price in the past 24 hours.
+       * - priceChange24hr: The price change in the past 24 hours.
+       * - priceChangePercent24hr: The price change percentage in the past 24 hours.
+       *
+       * If an error occurs during fetching, returns null.
+       */
+      pairDetail: async (_, { symbol }) => {
+        // To get detailed ticker info, use Binance’s 24hr ticker price change API
+        try {
+          const response = await axios.get(
+            `https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol.toUpperCase()}`
+          );
+          const data = response.data;
+          return {
+            symbol: data.symbol,
+            price: data.lastPrice,
+            high24hr: data.highPrice,
+            low24hr: data.lowPrice,
+            priceChange24hr: data.priceChange,
+            priceChangePercent24hr: data.priceChangePercent,
+          };
+        } catch (err) {
+          console.error(err);
+          return null;
+        }
+      },
     },
   };
