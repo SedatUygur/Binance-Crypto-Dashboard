@@ -6,3 +6,14 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+  
+  graphql-service:
+    build: ./services/graphql-service
+    container_name: graphql-service
+    ports:
+      - "4000:4000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
