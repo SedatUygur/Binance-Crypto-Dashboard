@@ -3,8 +3,8 @@ import Redis from 'ioredis';
 import WebSocket from 'ws';
 
 const redis = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: Number(process.env.REDIS_PORT) || 6379,
+    host: process.env.REDIS_HOST || 'localhost',
+    port: Number(process.env.REDIS_PORT) || 6379,
 });
 
 // Number of trading pairs to fetch
@@ -21,20 +21,20 @@ const REDIS_CHANNEL = 'tickerUpdates';
  */
 
 async function fetchTradingPairs() {
-  try {
-    // Binance API endpoint to fetch exchange info
-    const response = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
-    const symbols = response.data.symbols
-      .filter((s) => s.status === 'TRADING')
-      .slice(0, PAIR_COUNT)
-      .map((s) => s.symbol.toLowerCase()); // Binance expects lower-case symbols for streams
+    try {
+        // Binance API endpoint to fetch exchange info
+        const response = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
+        const symbols = response.data.symbols
+        .filter((s) => s.status === 'TRADING')
+        .slice(0, PAIR_COUNT)
+        .map((s) => s.symbol.toLowerCase()); // Binance expects lower-case symbols for streams
 
-    console.log('Fetched trading pairs:', symbols);
-    return symbols;
-  } catch (err) {
-    console.error('Error fetching trading pairs', err);
-    return [];
-  }
+        console.log('Fetched trading pairs:', symbols);
+        return symbols;
+    } catch (err) {
+        console.error('Error fetching trading pairs', err);
+        return [];
+    }
 }
 
 /**
@@ -75,3 +75,21 @@ function subscribeToTicker(pair) {
       setTimeout(() => subscribeToTicker(pair), 5000);
     });
 }
+
+/**
+ * Initializes the ticker service by fetching available trading pairs and subscribing
+ * to each pair's WebSocket stream. Any received ticker data is published to Redis
+ * under the 'tickerUpdates' channel.
+ *
+ * @example
+ * startTickerService();
+ */
+async function startTickerService() {
+    const tradingPairs = await fetchTradingPairs();
+  
+    tradingPairs.forEach((pair) => {
+      subscribeToTicker(pair);
+    });
+}
+  
+startTickerService();
