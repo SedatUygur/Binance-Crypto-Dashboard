@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import TradingPairsList, { TradingPair } from '../components/TradingPairsList';
 import TickerSubscription from '../components/TickerSubscription';
 import PairDetail from '../components/PairDetail';
+import HistoricalChart from '../components/HistoricalChart';
 
 const PageContainer = styled.main`
   max-width: 800px;
@@ -29,6 +30,7 @@ export default function Home() {
           <h2>Selected Pair: {selectedPair.symbol}</h2>
           <TickerSubscription symbol={selectedPair.symbol} />
           <PairDetail symbol={selectedPair.symbol} />
+          <HistoricalChart symbol={selectedPair.symbol} />
         </section>
       )}
     </PageContainer>
