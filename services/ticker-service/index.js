@@ -34,7 +34,7 @@ const REDIS_CHANNEL = 'tickerUpdates';
  * If an error occurs during fetching, the function will throw an exception.
  */
 
-async function fetchHistoricalData(symbol) {
+export async function fetchHistoricalData(symbol) {
   const now = Date.now();
   // Calculate timestamp for 1 month ago (approx. 30 days)
   const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
