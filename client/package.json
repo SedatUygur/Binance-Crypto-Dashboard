@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.12.9",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "graphql": "^16.10.0",
     "graphql-ws": "^5.16.2",
