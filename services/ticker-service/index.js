@@ -7,6 +7,10 @@ const redis = new Redis({
     port: Number(process.env.REDIS_PORT) || 6379,
 });
 
+async function addUserSubscription(userId, symbol) {
+  await redis.sadd(`user:${userId}:subscriptions`, symbol);
+}
+
 // Number of trading pairs to fetch
 const PAIR_COUNT = 100;
 const REDIS_CHANNEL = 'tickerUpdates';

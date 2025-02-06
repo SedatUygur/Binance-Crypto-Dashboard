@@ -14,6 +14,10 @@ const redisSubscriber = new Redis({
   port: process.env.REDIS_PORT || 6379,
 });
 
+async function addUserSubscription(userId, symbol) {
+  await redisSubscriber.sadd(`user:${userId}:subscriptions`, symbol);
+}
+
 // Schema Definition
 const typeDefs = `#graphql
   type TradingPair {
