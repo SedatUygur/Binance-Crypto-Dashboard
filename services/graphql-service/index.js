@@ -1,6 +1,8 @@
-const { ApolloServer, gql, PubSub } = require('apollo-server');
-const axios = require('axios');
-const Redis = require('ioredis');
+import { ApolloServer } from '@apollo/server';
+import { PubSub } from 'graphql-subscriptions';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import axios from 'axios';
+import Redis from 'ioredis';
 
 const REDIS_CHANNEL = 'tickerUpdates';
 const TICKER_TOPIC = 'TICKER_TOPIC';
@@ -13,7 +15,7 @@ const redisSubscriber = new Redis({
 });
 
 // Schema Definition
-const typeDefs = gql`
+const typeDefs = `#graphql
   type TradingPair {
     symbol: String!
     baseAsset: String
@@ -177,7 +179,5 @@ const server = new ApolloServer({
 });
 
 // Start the server
-server.listen({ port: 4000 }).then(({ url, subscriptionsUrl }) => {
-    console.log(`GraphQL Server ready at ${url}`);
-    console.log(`Subscriptions ready at ${subscriptionsUrl}`);
-});
+const { url } = await startStandaloneServer(server);
+console.log(`🚀 Server ready at ${url}`);
