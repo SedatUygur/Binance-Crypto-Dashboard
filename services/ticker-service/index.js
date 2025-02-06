@@ -20,6 +20,36 @@ const PAIR_COUNT = 100;
 const REDIS_CHANNEL = 'tickerUpdates';
 
 /**
+ * Fetches historical candlestick data for a given cryptocurrency symbol
+ * from Binance's API. The data covers a period of approximately one month
+ * with a daily interval.
+ *
+ * @param {string} symbol - The cryptocurrency symbol (e.g., 'BTCUSDT') for 
+ * which to retrieve historical data.
+ *
+ * @returns {Promise<Array>} A promise that resolves to an array containing 
+ * Open-High-Low-Close (OHLC) data for each day within the specified period. 
+ * Each entry is an array representing a day's candlestick data.
+ *
+ * If an error occurs during fetching, the function will throw an exception.
+ */
+
+async function fetchHistoricalData(symbol) {
+  const now = Date.now();
+  // Calculate timestamp for 1 month ago (approx. 30 days)
+  const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
+  const response = await axios.get('https://api.binance.com/api/v3/klines', {
+    params: {
+      symbol: symbol.toUpperCase(),
+      interval: '1d',
+      startTime: oneMonthAgo,
+      endTime: now,
+    },
+  });
+  return response.data; // Each entry is an array with OHLC data
+}
+
+/**
  * Fetches a list of trading pairs that are currently available for trading on Binance.
  * Utilizes Binance's API to retrieve exchange information and filters active trading pairs.
  * Limits the number of pairs to a predefined count and converts symbols to lowercase.
