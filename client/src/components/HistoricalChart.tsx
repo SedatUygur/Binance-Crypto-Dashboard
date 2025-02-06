@@ -2,8 +2,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { fetchHistoricalData } from '../../../services/ticker-service/index';
 import { Chart, registerables } from 'chart.js';
+import { fetchHistoricalData } from '../utils/binanceApi';
+
 Chart.register(...registerables);
 
 interface HistoricalChartProps {
