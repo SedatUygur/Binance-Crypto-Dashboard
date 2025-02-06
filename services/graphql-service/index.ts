@@ -153,3 +153,9 @@ const server = new ApolloServer({
       path: '/subscriptions',
     },
 });
+
+// Start the server
+server.listen({ port: 4000 }).then(({ url, subscriptionsUrl }) => {
+    console.log(`GraphQL Server ready at ${url}`);
+    console.log(`Subscriptions ready at ${subscriptionsUrl}`);
+});
