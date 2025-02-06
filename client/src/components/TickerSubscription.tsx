@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSubscription } from '@apollo/client';
+import styled from 'styled-components';
 import { TICKER_UPDATE } from '../graphql/operations';
 
 interface TickerData {
@@ -14,6 +15,18 @@ interface TickerData {
 interface TickerSubscriptionProps {
   symbol: string;
 }
+
+const Container = styled.div`
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+`;
+
+const Title = styled.h3`
+  margin-bottom: 0.5rem;
+`;
 
 /**
  * A React functional component that subscribes to real-time ticker updates for a given cryptocurrency symbol.
@@ -41,8 +54,8 @@ const TickerSubscription: React.FC<TickerSubscriptionProps> = ({ symbol }) => {
   if (!ticker) return <p>No data received yet.</p>;
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '1rem', marginTop: '1rem' }}>
-      <h3>Ticker Update for {ticker.symbol}</h3>
+    <Container>
+      <Title>Ticker Update for {ticker.symbol}</Title>
       <p>
         <strong>Price:</strong> {ticker.price}
       </p>
@@ -58,7 +71,7 @@ const TickerSubscription: React.FC<TickerSubscriptionProps> = ({ symbol }) => {
       <p>
         <strong>24hr Price % Change:</strong> {ticker.priceChangePercent24hr}
       </p>
-    </div>
+    </Container>
   );
 };
 
