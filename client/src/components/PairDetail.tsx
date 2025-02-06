@@ -1,10 +1,24 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import styled from 'styled-components';
 import { GET_PAIR_DETAIL } from '../graphql/operations';
 
 interface PairDetailProps {
   symbol: string;
 }
+
+const Container = styled.div`
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+`;
+
+const Title = styled.h3`
+  margin-bottom: 0.5rem;
+`;
+
 
 /**
  * A React functional component that displays detailed information for a
@@ -38,8 +52,8 @@ const PairDetail: React.FC<PairDetailProps> = ({ symbol }) => {
   if (!detail) return <p>No details available for {symbol}.</p>;
 
   return (
-    <div style={{ border: '1px solid #999', padding: '1rem', marginTop: '1rem' }}>
-      <h3>Detail for {detail.symbol}</h3>
+    <Container>
+      <Title>Detail for {detail.symbol}</Title>
       <p>
         <strong>Price:</strong> {detail.price}
       </p>
@@ -55,7 +69,7 @@ const PairDetail: React.FC<PairDetailProps> = ({ symbol }) => {
       <p>
         <strong>24hr Price % Change:</strong> {detail.priceChangePercent24hr}
       </p>
-    </div>
+    </Container>
   );
 };
 
