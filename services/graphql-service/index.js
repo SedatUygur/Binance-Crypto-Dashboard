@@ -40,7 +40,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    tradingPairs: [TradingPair!]!
+    tradingPairs(filter: String): [TradingPair!]!
     pairDetail(symbol: String!): Ticker
   }
 
