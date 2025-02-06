@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
+import styled from 'styled-components';
 import { GET_TRADING_PAIRS } from '../graphql/operations';
 
 export interface TradingPair {
@@ -11,6 +12,44 @@ export interface TradingPair {
 interface TradingPairsListProps {
   onSelectPair: (pair: TradingPair) => void;
 }
+
+const Container = styled.div`
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const Heading = styled.h2`
+  margin-bottom: 1rem;
+`;
+
+const SearchInput = styled.input`
+  padding: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+`;
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 0.5rem;
+`;
+
+const PairButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 1rem;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 /**
  * A React component that displays a list of trading pairs fetched from a GraphQL API.
@@ -41,25 +80,24 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
   if (error) return <p>Error fetching trading pairs: {error.message}</p>;
 
   return (
-    <div>
-      <h2>Trading Pairs</h2>
-      <input
+    <Container>
+      <Heading>Trading Pairs</Heading>
+      <SearchInput
         type="text"
         placeholder="Search pairs..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%' }}
       />
-      <ul>
+      <List>
         {filteredPairs.map((pair: TradingPair) => (
-          <li key={pair.symbol}>
-            <button onClick={() => onSelectPair(pair)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+          <ListItem key={pair.symbol}>
+            <PairButton onClick={() => onSelectPair(pair)}>
               {pair.symbol} ({pair.baseAsset}/{pair.quoteAsset})
-            </button>
-          </li>
+            </PairButton>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 
