@@ -2,6 +2,10 @@ const { ApolloServer, gql, PubSub } = require('apollo-server');
 const Redis = require('ioredis');
 const axios = require('axios');
 
+const TICKER_TOPIC = 'TICKER_TOPIC';
+
+const pubsub = new PubSub();
+
 const redisSubscriber = new Redis({
   host: process.env.REDIS_HOST || 'localhost',
   port: process.env.REDIS_PORT || 6379,
@@ -100,5 +104,43 @@ const resolvers = {
           return null;
         }
       },
+    },
+    Subscription: {
+        tickerUpdate: {
+        /**
+         * Subscribes to a channel that receives all ticker updates, and
+         * filters them by the requested symbol.
+         *
+         * @param {Object} _ Parent object, not used.
+         * @param {Object} args The arguments passed to the subscription.
+         * @param {string} args.symbol The symbol for which to receive ticker updates.
+         *
+         * @returns {AsyncIterator<Ticker>} An async iterator over the ticker updates
+         * for the requested symbol.
+         */
+          subscribe: (_, { symbol }) => {
+            // I simply filter messages published to our internal pubsub channel
+            return pubsub.asyncIterator(TICKER_TOPIC);
+          },
+        /**
+         * Called for each message published to the channel. Filters the message
+         * based on the requested symbol, and returns the message if it matches
+         * the symbol, or null if it does not match.
+         *
+         * @param {Ticker} payload The message payload.
+         * @param {Object} args The arguments passed to the subscription.
+         * @param {string} args.symbol The symbol for which to receive ticker updates.
+         *
+         * @returns {Ticker | null} The filtered message, or null if it does not match
+         * the requested symbol.
+         */
+          resolve: (payload, args) => {
+            // Filter for the requested symbol.
+            if (payload.symbol.toLowerCase() === args.symbol.toLowerCase()) {
+              return payload;
+            }
+            return null; // or skip if I want to filter out non-matching updates
+          },
+        },
     },
   };
