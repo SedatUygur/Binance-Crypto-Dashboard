@@ -1,7 +1,8 @@
 const { ApolloServer, gql, PubSub } = require('apollo-server');
-const Redis = require('ioredis');
 const axios = require('axios');
+const Redis = require('ioredis');
 
+const REDIS_CHANNEL = 'tickerUpdates';
 const TICKER_TOPIC = 'TICKER_TOPIC';
 
 const pubsub = new PubSub();
@@ -144,6 +145,15 @@ const resolvers = {
         },
     },
 };
+
+// Subscribe to Redis channel and forward to Apollo’s PubSub
+redisSubscriber.subscribe(REDIS_CHANNEL, (err, count) => {
+    if (err) {
+      console.error('Failed to subscribe: %s', err.message);
+    } else {
+      console.log(`Subscribed successfully! This client is currently subscribed to ${count} channels.`);
+    }
+});
 
 // Create the Apollo Server
 const server = new ApolloServer({
