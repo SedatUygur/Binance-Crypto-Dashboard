@@ -3,6 +3,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import axios from 'axios';
 import Redis from 'ioredis';
+import 'dotenv/config';
 
 const REDIS_CHANNEL = 'tickerUpdates';
 const TICKER_TOPIC = 'TICKER_TOPIC';
@@ -10,8 +11,8 @@ const TICKER_TOPIC = 'TICKER_TOPIC';
 const pubsub = new PubSub();
 
 const redisSubscriber = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 });
 
 async function addUserSubscription(userId, symbol) {
@@ -63,7 +64,7 @@ const resolvers = {
       tradingPairs: async (_, { filter }) => {
         // Fetch trading pair info from Binance API
         try {
-          const response = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
+          const response = await axios.get(process.env.BINANCE_EXCHANGE_INFO);
           // Filter for trading pairs and slice the first 100
           let pairs = response.data.symbols.filter(s => s.status === 'TRADING').slice(0, 100);
           if (filter) {
@@ -101,7 +102,7 @@ const resolvers = {
         // To get detailed ticker info, use Binance’s 24hr ticker price change API
         try {
           const response = await axios.get(
-            `https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol.toUpperCase()}`
+            `${process.env.BINANCE_TICKER_24HR}?symbol=${symbol.toUpperCase()}`
           );
           const data = response.data;
           return {

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/SedatUygur/Binance-Crypto-Dashboard",
   "dependencies": {
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "ioredis": "^5.4.2",
     "ws": "^8.18.0"
   },

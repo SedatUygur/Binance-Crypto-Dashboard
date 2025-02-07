@@ -6,7 +6,7 @@ export async function fetchHistoricalData(symbol: string) {
   const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
   
   // Binance API endpoint for klines (candlestick data)
-  const url = 'https://api.binance.com/api/v3/klines';
+  const url = process.env.NEXT_PUBLIC_BINANCE_API_KLINES!;
   
   try {
     const response = await axios.get(url, {

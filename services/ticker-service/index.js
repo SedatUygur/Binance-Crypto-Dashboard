@@ -1,10 +1,11 @@
 import axios from 'axios';
 import Redis from 'ioredis';
 import WebSocket from 'ws';
+import 'dotenv/config';
 
 const redis = new Redis({
-    host: process.env.REDIS_HOST || 'localhost',
-    port: Number(process.env.REDIS_PORT) || 6379,
+    host: process.env.REDIS_HOST,
+    port: Number(process.env.REDIS_PORT),
 });
 
 async function addUserSubscription(userId, symbol) {
@@ -38,7 +39,7 @@ export async function fetchHistoricalData(symbol) {
   const now = Date.now();
   // Calculate timestamp for 1 month ago (approx. 30 days)
   const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
-  const response = await axios.get('https://api.binance.com/api/v3/klines', {
+  const response = await axios.get(process.env.BINANCE_KLINES, {
     params: {
       symbol: symbol.toUpperCase(),
       interval: '1d',
@@ -61,7 +62,7 @@ export async function fetchHistoricalData(symbol) {
 async function fetchTradingPairs() {
     try {
         // Binance API endpoint to fetch exchange info
-        const response = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
+        const response = await axios.get(process.env.BINANCE_EXCHANGE_INFO);
         const symbols = response.data.symbols
         .filter((s) => s.status === 'TRADING')
         .slice(0, PAIR_COUNT)
@@ -87,7 +88,7 @@ async function fetchTradingPairs() {
 function subscribeToTicker(pair) {
     // Binance’s WebSocket endpoint for individual ticker streams:
     // Example endpoint: wss://stream.binance.com:9443/ws/btcusdt@ticker
-    const wsUrl = `wss://stream.binance.com:9443/ws/${pair}@ticker`;
+    const wsUrl = `${process.env.BINANCE_WEBSOCKET_ENDPOINT}/${pair}@ticker`;
     const ws = new WebSocket(wsUrl);
   
     ws.on('open', () => {

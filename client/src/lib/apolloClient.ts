@@ -5,13 +5,13 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 // HTTP link for queries and mutations
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/', // my GraphQL endpoint
+  uri: `${process.env.NEXT_PUBLIC_GRAPHQL_HOST}:${process.env.NEXT_PUBLIC_MY_PORT}/graphql`, // my GraphQL endpoint
 });
 
 // WebSocket link for subscriptions using graphql-ws
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://${process.env.NEXT_PUBLIC_MY_IP}:4000/subscriptions`,
+    url: `${process.env.NEXT_PUBLIC_SUBSCRIPTION_HOST}:${process.env.NEXT_PUBLIC_MY_PORT}/subscriptions`,
     // Optional: pass authentication token
     /*connectionParams: {
       authentication: user.authToken,

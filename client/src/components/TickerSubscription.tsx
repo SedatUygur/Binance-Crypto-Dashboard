@@ -44,6 +44,9 @@ const Title = styled.h3`
 const TickerSubscription: React.FC<TickerSubscriptionProps> = ({ symbol }) => {
   const { data, loading, error } = useSubscription<{ tickerUpdate: TickerData }>(TICKER_UPDATE, {
     variables: { symbol },
+    /*onSubscriptionData: ({ subscriptionData: { data } }) => {
+      // do something with `data` here
+    }*/
   });
 
   if (loading) return <p>Waiting for ticker updates...</p>;
