@@ -3,6 +3,8 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 import client from '../lib/apolloClient';
 import GlobalStyles from '../styles/GlobalStyles';
 
@@ -29,10 +31,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ApolloProvider client={client}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            {children}
-          </ThemeProvider>
+          <Provider store={store}>
+            <ThemeProvider theme={theme}>
+              <GlobalStyles />
+              {children}
+            </ThemeProvider>
+          </Provider>
         </ApolloProvider>
       </body>
     </html>
