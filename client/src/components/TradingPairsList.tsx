@@ -72,7 +72,7 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
   const filteredPairs = useMemo(() => {
     if (!data || !data.tradingPairs) return [];
     return data.tradingPairs.filter((pair: TradingPair) =>
-      pair.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+      pair.symbol.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }, [data, searchTerm]);
 
@@ -90,7 +90,10 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
       />
       <List className="flex flex-wrap justify-center">
         {filteredPairs.map((pair: TradingPair) => (
-          <ListItem key={pair.symbol} className="m-2 p-4 bg-gray-100 rounded-lg shadow-md w-full sm:w-1/2 md:w-1/4 lg:w-1/6">
+          <ListItem
+            key={pair.symbol}
+            className="m-2 w-full rounded-lg bg-gray-100 p-4 shadow-md sm:w-1/2 md:w-1/4 lg:w-1/6"
+          >
             <PairButton onClick={() => onSelectPair(pair)}>
               {pair.symbol} ({pair.baseAsset}/{pair.quoteAsset})
             </PairButton>

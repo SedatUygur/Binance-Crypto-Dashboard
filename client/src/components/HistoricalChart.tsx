@@ -19,9 +19,7 @@ const HistoricalChart: React.FC<HistoricalChartProps> = ({ symbol }) => {
       try {
         const data = await fetchHistoricalData(symbol);
         // Process the data to extract labels and values
-        const labels = data.map((entry: any) =>
-          new Date(entry[0]).toLocaleDateString()
-        );
+        const labels = data.map((entry: any) => new Date(entry[0]).toLocaleDateString());
         const prices = data.map((entry: any) => parseFloat(entry[4])); // Use closing price
 
         setChartData({

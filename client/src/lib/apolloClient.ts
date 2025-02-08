@@ -17,7 +17,7 @@ const wsLink = new GraphQLWsLink(
       authentication: user.authToken,
     },*/
     retryAttempts: 5,
-  })
+  }),
 );
 
 // Using split to send data to each link depending on operation type
@@ -25,12 +25,11 @@ const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
+      definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
     );
   },
   wsLink,
-  httpLink
+  httpLink,
 );
 
 const client = new ApolloClient({

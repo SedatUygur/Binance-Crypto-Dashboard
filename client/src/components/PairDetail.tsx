@@ -19,7 +19,6 @@ const Title = styled.h3`
   margin-bottom: 0.5rem;
 `;
 
-
 /**
  * A React functional component that displays detailed information for a
  * specific cryptocurrency trading pair, fetched from a GraphQL API.

@@ -4,10 +4,10 @@ export async function fetchHistoricalData(symbol: string) {
   const now = Date.now();
   // Calculate timestamp for 1 month ago (approximately 30 days)
   const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
-  
+
   // Binance API endpoint for klines (candlestick data)
   const url = process.env.NEXT_PUBLIC_BINANCE_API_KLINES!;
-  
+
   try {
     const response = await axios.get(url, {
       params: {
