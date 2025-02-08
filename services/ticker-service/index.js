@@ -2,6 +2,12 @@ import axios from 'axios';
 import Redis from 'ioredis';
 import WebSocket from 'ws';
 import 'dotenv/config';
+import cluster from 'cluster';
+import os from 'os';
+
+// Number of trading pairs to fetch
+const PAIR_COUNT = 100;
+const REDIS_CHANNEL = 'tickerUpdates';
 
 const redis = new Redis({
     host: process.env.REDIS_HOST,
@@ -15,10 +21,6 @@ async function addUserSubscription(userId, symbol) {
 async function getUserSubscriptions(userId) {
   return await redis.smembers(`user:${userId}:subscriptions`);
 }
-
-// Number of trading pairs to fetch
-const PAIR_COUNT = 100;
-const REDIS_CHANNEL = 'tickerUpdates';
 
 /**
  * Fetches historical candlestick data for a given cryptocurrency symbol
@@ -64,9 +66,9 @@ async function fetchTradingPairs() {
         // Binance API endpoint to fetch exchange info
         const response = await axios.get(process.env.BINANCE_EXCHANGE_INFO);
         const symbols = response.data.symbols
-        .filter((s) => s.status === 'TRADING')
-        .slice(0, PAIR_COUNT)
-        .map((s) => s.symbol.toLowerCase()); // Binance expects lower-case symbols for streams
+          .filter((s) => s.status === 'TRADING')
+          .slice(0, PAIR_COUNT)
+          .map((s) => s.symbol.toLowerCase()); // Binance expects lower-case symbols for streams
 
         console.log('Fetched trading pairs:', symbols);
         return symbols;
@@ -131,4 +133,21 @@ async function startTickerService() {
     });
 }
   
-startTickerService();
+// Check if the current process is the primary or a worker
+if (cluster.isPrimary) {
+  const numCPUs = os.cpus().length; // Get the number of CPU cores
+  console.log(`Master ${process.pid} is running`);
+
+  // Fork workers
+  for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died`);
+  });
+} else {
+  // This code runs in worker processes
+  console.log(`Worker ${process.pid} started`);
+  startTickerService();
+}
