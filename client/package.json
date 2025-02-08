@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -31,6 +33,7 @@
     "@types/styled-components": "^5.1.34",
     "autoprefixer": "^10.4.20",
     "babel-plugin-styled-components": "^2.1.4",
+    "cypress": "^14.0.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
