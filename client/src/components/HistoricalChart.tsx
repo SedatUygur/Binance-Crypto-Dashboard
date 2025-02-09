@@ -42,7 +42,11 @@ const HistoricalChart: React.FC<HistoricalChartProps> = ({ symbol }) => {
 
   if (!chartData) return <p>Loading chart...</p>;
 
-  return <Line data={chartData} />;
+  return (
+    <div className="historical-chart">
+      <Line data={chartData} />
+    </div>
+  );
 };
 
 export default HistoricalChart;

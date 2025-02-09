@@ -7,6 +7,8 @@ import TickerSubscription from '../components/TickerSubscription';
 import PairDetail from '../components/PairDetail';
 import HistoricalChart from '../components/HistoricalChart';
 
+import './globals.css';
+
 const PageContainer = styled.main`
   max-width: 800px;
   margin: 2rem auto;

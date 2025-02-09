@@ -19,3 +19,15 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.historical-chart {
+  width: 100%;
+  max-width: 600px; /* Limit max width */
+  margin: auto; /* Center the chart */
+}
+
+@media (min-width: 768px) {
+  .historical-chart {
+    max-width: 800px; /* Wider on larger screens */
+  }
+}
