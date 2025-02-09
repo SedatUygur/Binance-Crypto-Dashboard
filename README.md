@@ -151,7 +151,7 @@ Install a package manager e.g npm, yarn, pnpm, bun etc.
 
 - [x] Design an efficient and robust system on the backend to handle multiple WebSocket subscriptions simultaneously. 
    - [x] Add advanced features to minimize latency.
-- [ ] Ensure a responsive and intuitive user experience on the front end (Partially Done)
+- [x] Ensure a responsive and intuitive user experience on the front end.
 - [x] Add search and filter functionality on the backend to improve user navigation.
 - [x] Display a real-time one-month (daily) historical chart for pairs using the Binance API.
 

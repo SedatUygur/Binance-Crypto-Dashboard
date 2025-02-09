@@ -99,10 +99,7 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
       />
       <List>
         {filteredPairs.map((pair: TradingPair) => (
-          <ListItem
-            key={pair.symbol}
-            className="pair-item"
-          >
+          <ListItem key={pair.symbol} className="pair-item">
             <PairButton onClick={() => onSelectPair(pair)}>
               {pair.symbol} ({pair.baseAsset}/{pair.quoteAsset})
             </PairButton>
