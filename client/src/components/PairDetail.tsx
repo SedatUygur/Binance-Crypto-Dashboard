@@ -51,7 +51,7 @@ const PairDetail: React.FC<PairDetailProps> = ({ symbol }) => {
   if (!detail) return <p>No details available for {symbol}.</p>;
 
   return (
-    <Container>
+    <Container className="pair-detail">
       <Title>Detail for {detail.symbol}</Title>
       <p>
         <strong>Price:</strong> {detail.price}
