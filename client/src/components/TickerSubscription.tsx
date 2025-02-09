@@ -22,10 +22,9 @@ const Container = styled.div`
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
-`;
-
-const Title = styled.h3`
-  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 /**
@@ -61,21 +60,23 @@ const TickerSubscription: React.FC<TickerSubscriptionProps> = ({ symbol }) => {
 
   return (
     <Container className="ticker-subscription">
-      <Title>Ticker Update for {ticker.symbol}</Title>
       <p>
-        <strong>Price:</strong> {ticker.price}
+        <strong>Pair</strong> {ticker.symbol}
       </p>
       <p>
-        <strong>24hr High:</strong> {ticker.high24hr}
+        <strong>Price</strong> {ticker.price}
       </p>
       <p>
-        <strong>24hr Low:</strong> {ticker.low24hr}
+        <strong>24hr High</strong> {ticker.high24hr}
       </p>
       <p>
-        <strong>24hr Price Change:</strong> {ticker.priceChange24hr}
+        <strong>24hr Low</strong> {ticker.low24hr}
       </p>
       <p>
-        <strong>24hr Price % Change:</strong> {ticker.priceChangePercent24hr}
+        <strong>24hr Price Change</strong> {ticker.priceChange24hr}
+      </p>
+      <p>
+        <strong>24hr Price % Change</strong> {ticker.priceChangePercent24hr}
       </p>
     </Container>
   );

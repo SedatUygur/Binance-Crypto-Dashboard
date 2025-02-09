@@ -35,10 +35,19 @@ const SearchInput = styled.input`
 const List = styled.ul`
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const ListItem = styled.li`
   margin-bottom: 0.5rem;
+  flex: 1 1 45%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
 `;
 
 const PairButton = styled.button`
@@ -88,11 +97,11 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <List className="flex flex-wrap justify-center">
+      <List>
         {filteredPairs.map((pair: TradingPair) => (
           <ListItem
             key={pair.symbol}
-            className="m-2 w-full rounded-lg bg-gray-100 p-4 shadow-md sm:w-1/2 md:w-1/4 lg:w-1/6"
+            className="pair-item"
           >
             <PairButton onClick={() => onSelectPair(pair)}>
               {pair.symbol} ({pair.baseAsset}/{pair.quoteAsset})

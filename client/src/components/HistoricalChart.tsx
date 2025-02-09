@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import styled from 'styled-components';
 import { fetchHistoricalData } from '../utils/binanceApi';
 
 Chart.register(...registerables);
@@ -10,6 +11,12 @@ Chart.register(...registerables);
 interface HistoricalChartProps {
   symbol: string;
 }
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 600px; /* Limit max width */
+  margin: auto; /* Center the chart */
+`;
 
 const HistoricalChart: React.FC<HistoricalChartProps> = ({ symbol }) => {
   const [chartData, setChartData] = useState<any>(null);
@@ -43,9 +50,9 @@ const HistoricalChart: React.FC<HistoricalChartProps> = ({ symbol }) => {
   if (!chartData) return <p>Loading chart...</p>;
 
   return (
-    <div className="historical-chart">
+    <Container className="historical-chart">
       <Line data={chartData} />
-    </div>
+    </Container>
   );
 };
 

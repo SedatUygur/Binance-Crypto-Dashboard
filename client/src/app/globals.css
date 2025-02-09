@@ -20,24 +20,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.historical-chart {
-  width: 100%;
-  max-width: 600px; /* Limit max width */
-  margin: auto; /* Center the chart */
-}
-
 @media (min-width: 768px) {
   .historical-chart {
     max-width: 800px; /* Wider on larger screens */
   }
-}
-
-.pair-detail {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 10px;
-  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -48,16 +34,15 @@ body {
   }
 }
 
-.ticker-subscription {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
 @media (min-width: 768px) {
   .ticker-subscription {
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .pair-item {
+    flex: 1 1 30%;
   }
 }

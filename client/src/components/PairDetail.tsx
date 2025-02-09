@@ -9,14 +9,12 @@ interface PairDetailProps {
 
 const Container = styled.div`
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
-`;
-
-const Title = styled.h3`
-  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
 `;
 
 /**
@@ -52,21 +50,23 @@ const PairDetail: React.FC<PairDetailProps> = ({ symbol }) => {
 
   return (
     <Container className="pair-detail">
-      <Title>Detail for {detail.symbol}</Title>
       <p>
-        <strong>Price:</strong> {detail.price}
+        <strong>Pair</strong> {detail.symbol}
       </p>
       <p>
-        <strong>24hr High:</strong> {detail.high24hr}
+        <strong>Price</strong> {detail.price}
       </p>
       <p>
-        <strong>24hr Low:</strong> {detail.low24hr}
+        <strong>24hr High</strong> {detail.high24hr}
       </p>
       <p>
-        <strong>24hr Price Change:</strong> {detail.priceChange24hr}
+        <strong>24hr Low</strong> {detail.low24hr}
       </p>
       <p>
-        <strong>24hr Price % Change:</strong> {detail.priceChangePercent24hr}
+        <strong>24hr Price Change</strong> {detail.priceChange24hr}
+      </p>
+      <p>
+        <strong>24hr Price % Change</strong> {detail.priceChangePercent24hr}
       </p>
     </Container>
   );

@@ -29,7 +29,6 @@ export default function Home() {
 
       {selectedPair && (
         <section>
-          <h2>Selected Pair: {selectedPair.symbol}</h2>
           <TickerSubscription symbol={selectedPair.symbol} />
           <PairDetail symbol={selectedPair.symbol} />
           <HistoricalChart symbol={selectedPair.symbol} />
