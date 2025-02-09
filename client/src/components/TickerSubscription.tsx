@@ -60,7 +60,7 @@ const TickerSubscription: React.FC<TickerSubscriptionProps> = ({ symbol }) => {
   if (!ticker) return <p>No data received yet.</p>;
 
   return (
-    <Container>
+    <Container className="ticker-subscription">
       <Title>Ticker Update for {ticker.symbol}</Title>
       <p>
         <strong>Price:</strong> {ticker.price}
