@@ -38,3 +38,16 @@ export const TICKER_UPDATE = gql`
     }
   }
 `;
+
+export const ALL_TICKER_UPDATES = gql`
+  subscription OnAllTickerUpdates {
+    tickerUpdate(symbol: "") {
+      symbol
+      price
+      high24hr
+      low24hr
+      priceChange24hr
+      priceChangePercent24hr
+    }
+  }
+`;

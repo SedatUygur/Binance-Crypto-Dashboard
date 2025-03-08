@@ -153,7 +153,7 @@ const resolvers = {
           resolve: (payload, args, context) => {
             // Filter for the requested symbol.
             // Only send update if symbol is in user's subscriptions
-            if (context.userSubscriptions.includes(payload.symbol) && payload.symbol.toLowerCase() === args.symbol.toLowerCase()) {
+            if (!args.symbol || (context.userSubscriptions.includes(payload.symbol) && payload.symbol.toLowerCase() === args.symbol.toLowerCase())) {
               return payload;
             }
             return null; // or skip if I want to filter out non-matching updates

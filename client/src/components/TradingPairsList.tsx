@@ -32,6 +32,33 @@ const SearchInput = styled.input`
   border-radius: 4px;
 `;
 
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const TableHead = styled.thead`
+  background-color: #f0f0f0;
+`;
+
+const TableHeadCell = styled.th`
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+`;
+
+const TableBody = styled.tbody`
+  tr {
+    :hover {
+      background-color: #f9f9f9;
+    }
+  }
+`;
+
+const TableBodyCell = styled.td`
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+`;
+/*
 const List = styled.ul`
   list-style: none;
   padding: 0;
@@ -59,7 +86,7 @@ const PairButton = styled.button`
     text-decoration: underline;
   }
 `;
-
+*/
 /**
  * A React component that displays a list of trading pairs fetched from a GraphQL API.
  * The component allows users to filter the list by entering a search term.
@@ -97,7 +124,7 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <List>
+      {/* <List>
         {filteredPairs.map((pair: TradingPair) => (
           <ListItem key={pair.symbol} className="pair-item">
             <PairButton onClick={() => onSelectPair(pair)}>
@@ -105,7 +132,25 @@ const TradingPairsList: React.FC<TradingPairsListProps> = ({ onSelectPair }) => 
             </PairButton>
           </ListItem>
         ))}
-      </List>
+      </List> */}
+      <Table>
+        <TableHead>
+          <tr>
+            <TableHeadCell>Symbol</TableHeadCell>
+            <TableHeadCell>Base Asset</TableHeadCell>
+            <TableHeadCell>Quote Asset</TableHeadCell>
+          </tr>
+        </TableHead>
+        <TableBody>
+          {filteredPairs.map((pair: TradingPair) => (
+            <tr key={pair.symbol} onClick={() => onSelectPair(pair)}>
+              <TableBodyCell>{pair.symbol}</TableBodyCell>
+              <TableBodyCell>{pair.baseAsset}</TableBodyCell>
+              <TableBodyCell>{pair.quoteAsset}</TableBodyCell>
+            </tr>
+          ))}
+        </TableBody>
+      </Table>
     </Container>
   );
 };
