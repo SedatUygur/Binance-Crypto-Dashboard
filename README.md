@@ -1,24 +1,6 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/SedatUygur/Binance-Crypto-Dashboard/pull/73 -->
 
 <a id="readme-top"></a>
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <h3 align="center">Binance Crypto Dashboard</h3>
@@ -234,15 +216,15 @@ Project Link: [https://github.com/SedatUygur/Binance-Crypto-Dashboard](https://g
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/SedatUygur/flightflex.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/SedatUygur/Binance-Crypto-Dashboard.svg?style=for-the-badge
 [contributors-url]: https://github.com/SedatUygur/Binance-Crypto-Dashboard/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SedatUygur/flightflex.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/SedatUygur/Binance-Crypto-Dashboard.svg?style=for-the-badge
 [forks-url]: https://github.com/SedatUygur/Binance-Crypto-Dashboard/network/members
-[stars-shield]: https://img.shields.io/github/stars/SedatUygur/flightflex.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/SedatUygur/Binance-Crypto-Dashboard.svg?style=for-the-badge
 [stars-url]: https://github.com/SedatUygur/Binance-Crypto-Dashboard/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SedatUygur/flightflex.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/SedatUygur/Binance-Crypto-Dashboard.svg?style=for-the-badge
 [issues-url]: https://github.com/SedatUygur/Binance-Crypto-Dashboard/issues
-[license-shield]: https://img.shields.io/github/license/SedatUygur/flightflex.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/SedatUygur/Binance-Crypto-Dashboard.svg?style=for-the-badge
 [license-url]: https://github.com/SedatUygur/Binance-Crypto-Dashboard/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/sedat-can-uygur
